@@ -1,0 +1,29 @@
+\section{Enunciado formal del problema}
+
+Dado un conjunto $V$ de $n$ videos correspondientes a los rivales a analizar. Cada video se representa como un par $(s_i, a_i)$:
+\[
+    V = \{(s_i, a_i) \in \mathbb{R}_{>0}^2 \mid i \in [n]\}
+\]
+Donde cada par representa un video, siendo $s_i$ el tiempo que le toma a Scaloni analizarlo y $a_i$ el tiempo que le toma a su ayudante.
+
+Sea un orden cualquiera de los videos $X = (v_{\pi(1)}, \dots, v_{\pi(n)})$, donde $\pi$ es una permutación de los índices $\{1, \dots, n\}$.
+Definimos $S_i$ como el tiempo de finalización de Scaloni para el video $i$-ésimo en dicho orden, es decir, la suma de las duraciones de su parte de todos los videos que lo preceden más el actual:
+\[
+    S_i = \sum_{k=1}^i s_{\pi(k)}
+\]
+
+Dado que los ayudantes trabajan en paralelo y recién pueden comenzar cuando Scaloni termina la parte del video $\pi(i)$, el tiempo exacto en el que el ayudante termina de analizar el video $\pi(i)$ está dado por:
+\[
+    C_i = S_i + a_{\pi(i)} = \sum_{k=1}^i s_{\pi(k)} + a_{\pi(i)}
+\]
+
+Se busca una secuencia $X$ de videos que minimice el tiempo máximo de finalización de todos los ayudantes, denotado por la función $f(X)$:
+\[
+    f(X) := \max_{1 \le i \le n} C_i = \max_{1 \le i \le n} \left( \sum_{k=1}^i s_{\pi(k)} + a_{\pi(i)} \right)
+\]
+\[
+    X_{opt} \in \arg\min_X f(X)
+\]
+
+\subsection{Algoritmo Propuesto}
+El algoritmo Greedy propuesto consiste en ordenar el conjunto de videos $V$ de forma \textbf{descendente} en función del tiempo que tardan los ayudantes, es decir, según el valor $a_i$. De esta forma, el video con mayor $a_i$ será procesado primero.
