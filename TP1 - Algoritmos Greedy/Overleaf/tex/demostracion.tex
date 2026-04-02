@@ -1,0 +1,66 @@
+\section{Demostración}
+
+Procedemos a demostrar la optimalidad del algoritmo mediante inversiones. Para esto planteamos dos afirmaciones que una vez probadas, nos permitiran concluir el resultado. 
+
+\textbf{Idea:} Queremos minimizar el tiempo total de finalización, que viene dado por:
+\[
+\max_i \left( \sum_{j \le i} s_j + a_i \right)
+\]
+donde los videos se procesan en cierto orden.
+
+\textbf{Propuesta greedy:} 
+ordenar los videos en orden decreciente según $a_i$.
+
+\textbf{Demostración:}
+
+Sea una solución cualquiera que no respeta el orden decreciente de $a_i$. Entonces, existe al menos un par de videos consecutivos $i, j$ tal que $i$ aparece antes que $j$ y:
+\[
+a_i < a_j.
+\]
+
+Sea $T$ el tiempo acumulado de Scaloni antes de procesar $i$ y $j$.
+
+\textbf{Orden original:} $i \rightarrow j$
+\[
+C_i = T + s_i + a_i, \quad
+C_j = T + s_i + s_j + a_j.
+\]
+El tiempo máximo en este bloque es:
+\[
+\max(C_i, C_j) = \max(T + s_i + a_i,\; T + s_i + s_j + a_j).
+\]
+
+\textbf{Orden intercambiado:} $j \rightarrow i$
+\[
+C'_j = T + s_j + a_j, \quad
+C'_i = T + s_j + s_i + a_i.
+\]
+El tiempo máximo pasa a ser:
+\[
+\max(C'_j, C'_i) = \max(T + s_j + a_j,\; T + s_j + s_i + a_i).
+\]
+
+Como $a_j > a_i$, se tiene que:
+\[
+T + s_i + s_j + a_j \ge T + s_i + a_i,
+\]
+por lo que en el orden original domina $C_j$.
+
+Además,
+\[
+T + s_j + a_j \le T + s_i + s_j + a_j,
+\]
+y
+\[
+T + s_j + s_i + a_i \le T + s_i + s_j + a_j,
+\]
+por lo tanto:
+\[
+\max(C'_j, C'_i) \le \max(C_i, C_j).
+\]
+
+Esto demuestra que intercambiar $i$ y $j$ no aumenta el tiempo máximo.
+
+Repitiendo este proceso para eliminar todas las inversiones, se obtiene un orden en el cual los $a_i$ están en orden decreciente, sin aumentar el tiempo total.
+
+\textbf{Conclusión:} Existe una solución óptima en la que los videos están ordenados en orden decreciente según $a_i$, lo que justifica la estrategia greedy.
