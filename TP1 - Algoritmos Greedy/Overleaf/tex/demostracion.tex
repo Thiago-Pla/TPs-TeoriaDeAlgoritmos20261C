@@ -1,17 +1,35 @@
 \section{Demostración}
 
-Procedemos a demostrar la optimalidad del algoritmo mediante inversiones. Para esto planteamos dos afirmaciones que una vez probadas, nos permitiran concluir el resultado. 
+Procedemos a demostrar la optimalidad del algoritmo greedy propuesto, mediante inversiones. Para esto planteamos dos afirmaciones que una vez probadas, nos permitirán concluir el resultado. 
 
-\textbf{Idea:} Queremos minimizar el tiempo total de finalización, que viene dado por:
-\[
-\max_i \left( \sum_{j \le i} s_j + a_i \right)
-\]
-donde los videos se procesan en cierto orden.
+Decimos que una secuencia de videos tiene una inversión, si dentro de la misma tenemos dos videos $V_i, V_j$ tal que $i < j$ pero $a_i < a_j$.
+\\
 
-\textbf{Propuesta greedy:} 
-ordenar los videos en orden decreciente según $a_i$.
+\textbf{Comparación de secuencias sin inversiones}
 
-\textbf{Demostración:}
+\textbf{Postulado: } Toda secuencia sin inversiones tiene el mismo tiempo de finalización.
+
+\textbf{Demostración: } Por no tener inversiones, solo pueden variar la posición de videos que tienen el mismo $a_i$, y van a tener que ser consecutivos. El ultimo de los videos es el que tiene mayor $a_i$ entre ellos.
+
+\textbf{Ejemplo}
+
+Dados 3 videos ($v_1, v_2$ y $v_3$), para los cuales: 
+
+$a_1 = a_2 = a_3 = 4$
+
+$s_1 = 1, s_2 = 2$ y $s_3 = 3$
+
+$v_1, v_2, v_3$ \rightarrow C = 10
+
+$v_2, v_1, v_3$ \rightarrow C = 10
+
+$v_1, v_3, v_2$ \rightarrow C = 10
+
+(...) 
+el tiempo va a ser el mismo con todas sus premutaciones.
+\\
+
+\textbf{Secuencia sin inversiones optima}
 
 Sea una solución cualquiera que no respeta el orden decreciente de $a_i$. Entonces, existe al menos un par de videos consecutivos $i, j$ tal que $i$ aparece antes que $j$ y:
 \[
