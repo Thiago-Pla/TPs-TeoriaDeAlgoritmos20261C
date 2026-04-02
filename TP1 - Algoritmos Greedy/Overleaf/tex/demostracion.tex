@@ -31,7 +31,7 @@ el tiempo va a ser el mismo con todas sus premutaciones.
 
 \textbf{Secuencia sin inversiones optima}
 
-Sea una solución cualquiera que no respeta el orden decreciente de $a_i$. Entonces, existe al menos un par de videos consecutivos $i, j$ tal que $i$ aparece antes que $j$ y:
+Supongamos, que existe una solución óptima $\mathcal{O}$ que es estrictamente mejor que nuestra propuesta y que no respeta el orden decreciente de los $a_i$. Entonces, debe existir al menos una \textbf{inversión}: un par de videos adyacentes, llamémoslos $i$ y $j$, tal que el video $i$ se procesa inmediatamente antes que el video $j$, pero rompen nuestra regla, es decir:
 \[
 a_i < a_j.
 \]
@@ -48,7 +48,8 @@ El tiempo máximo en este bloque es:
 \max(C_i, C_j) = \max(T + s_i + a_i,\; T + s_i + s_j + a_j).
 \]
 
-\textbf{Orden intercambiado:} $j \rightarrow i$
+\textbf{Orden intercambiado:} $j \rightarrow i$.
+Construimos una nueva solución intercambiando únicamente las posiciones de $i$ y $j$. Los nuevos tiempos de finalización son:
 \[
 C'_j = T + s_j + a_j, \quad
 C'_i = T + s_j + s_i + a_i.
