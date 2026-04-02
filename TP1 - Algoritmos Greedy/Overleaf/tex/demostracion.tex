@@ -1,32 +1,30 @@
 \section{Demostración}
 
-Procedemos a demostrar la optimalidad del algoritmo greedy propuesto, mediante inversiones. Para esto planteamos dos afirmaciones que una vez probadas, nos permitirán concluir el resultado. 
+Procedemos a demostrar la optimalidad del algoritmo Greedy propuesto mediante inversiones. Para esto planteamos dos afirmaciones que, una vez probadas, nos permitirán concluir el resultado.
 
-Decimos que una secuencia de videos tiene una inversión, si dentro de la misma tenemos dos videos $V_i, V_j$ tal que $i < j$ pero $a_i < a_j$.
-\\
+Decimos que una secuencia de videos tiene una \textbf{inversión} si dentro de la misma tenemos dos videos $i, j$ tal que $i$ se procesa antes que $j$ pero rompen nuestra regla, es decir, $a_i < a_j$.
 
-\textbf{Comparación de secuencias sin inversiones}
+\subsection{Comparación de secuencias sin inversiones}
 
-\textbf{Postulado: } Toda secuencia sin inversiones tiene el mismo tiempo de finalización.
+\textbf{Postulado:} Toda secuencia sin inversiones tiene el mismo tiempo máximo de finalización.
 
-\textbf{Demostración: } Por no tener inversiones, solo pueden variar la posición de videos que tienen el mismo $a_i$, y van a tener que ser consecutivos. El ultimo de los videos es el que tiene mayor $a_i$ entre ellos.
+\textbf{Demostración:} Por no tener inversiones, en la secuencia solo pueden variar su posición relativa aquellos videos que tienen exactamente el mismo valor de $a_i$ (y por ende, serán adyacentes). El tiempo máximo de finalización de los ayudantes en este sub-bloque está determinado por el tiempo de salida del último video del mismo. Como la suma total de los tiempos de Scaloni ($s$) para todo el bloque es una constante sin importar el orden interno, y todos comparten el mismo valor de $a_i$, el tiempo de finalización será idéntico para cualquier permutación posible de dicho bloque.
 
-\textbf{Ejemplo}
-
-Dados 3 videos ($v_1, v_2$ y $v_3$), para los cuales: 
+\textbf{Ejemplo:}
+Dados 3 videos ($v_1, v_2$ y $v_3$), para los cuales:
 
 $a_1 = a_2 = a_3 = 4$
 
 $s_1 = 1, s_2 = 2$ y $s_3 = 3$
 
-$v_1, v_2, v_3$ \rightarrow C = 10
+$v_1, v_2, v_3 \rightarrow C = 10$
 
-$v_2, v_1, v_3$ \rightarrow C = 10
+$v_2, v_1, v_3 \rightarrow C = 10$
 
-$v_1, v_3, v_2$ \rightarrow C = 10
+$v_1, v_3, v_2 \rightarrow C = 10$
 
-(...) 
-el tiempo va a ser el mismo con todas sus premutaciones.
+(...) \\
+Como se observa, el tiempo máximo va a ser el mismo con todas sus permutaciones.
 \\
 
 \textbf{Secuencia sin inversiones optima}
@@ -78,8 +76,8 @@ por lo tanto:
 \max(C'_j, C'_i) \le \max(C_i, C_j).
 \]
 
-Esto demuestra que intercambiar $i$ y $j$ no aumenta el tiempo máximo.
+Esto demuestra que intercambiar $i$ y $j$ disminuye (o en el peor de los casos, iguala) el tiempo máximo de este par. Además, como la suma de los tiempos de Scaloni gastados se mantiene inalterada ($s_i + s_j = s_j + s_i$), este intercambio no retrasa el inicio de los videos posteriores a $j$.
 
-Repitiendo este proceso para eliminar todas las inversiones, se obtiene un orden en el cual los $a_i$ están en orden decreciente, sin aumentar el tiempo total.
+Repitiendo este proceso para eliminar todas las inversiones una a una, se obtiene un orden en el cual los $a_i$ están en orden decreciente, garantizando que el tiempo total del proyecto nunca aumenta.
 
-\textbf{Conclusión:} Existe una solución óptima en la que los videos están ordenados en orden decreciente según $a_i$, lo que justifica la estrategia greedy.
+\textbf{Conclusión:} Existe una solución óptima en la que los videos están ordenados de forma decreciente según $a_i$, lo que justifica y demuestra la optimalidad de la estrategia Greedy.
